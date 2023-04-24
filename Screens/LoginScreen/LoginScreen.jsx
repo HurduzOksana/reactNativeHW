@@ -12,7 +12,7 @@ import {
 import React, { useState } from "react";
 import { styles } from "./LoginScreen.styles";
 
-export default function LoginScreen() {
+export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -118,10 +118,16 @@ export default function LoginScreen() {
                   </Text>
                 </Pressable>
               </View>
-              <TouchableOpacity style={styles.btn} onPress={handleSubmit}>
+              <TouchableOpacity
+                style={styles.btn}
+                onPress={() => navigation.navigate("Home")}
+              >
                 <Text style={styles.btnText}>Увійти</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.btnLog}>
+              <TouchableOpacity
+                style={styles.btnLog}
+                onPress={() => navigation.navigate("Registration")}
+              >
                 <Text style={styles.btnLogText}>
                   Немає аккаунта? Зареєструватися
                 </Text>

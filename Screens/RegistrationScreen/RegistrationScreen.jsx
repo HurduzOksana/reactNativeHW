@@ -13,7 +13,7 @@ import {
 import React, { useState } from "react";
 import { styles } from "./RegistrationScreen.styles";
 
-export default function RegistrationScreen() {
+export default function RegistrationScreen({ navigation }) {
   const [login, setLogin] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -171,7 +171,10 @@ export default function RegistrationScreen() {
               <TouchableOpacity style={styles.btn} onPress={handleSubmit}>
                 <Text style={styles.btnText}>Зареєструватися</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.btnLog}>
+              <TouchableOpacity
+                style={styles.btnLog}
+                onPress={() => navigation.navigate("Login")}
+              >
                 <Text style={styles.btnLogText}>Вже є аккаунт? Увійти</Text>
               </TouchableOpacity>
             </View>
