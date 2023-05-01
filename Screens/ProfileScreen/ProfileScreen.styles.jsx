@@ -25,9 +25,9 @@ export const styles = StyleSheet.create({
   },
   title: {
     fontFamily: "Roboto-Medium",
-    fontSize: 30,
+    // fontSize: 30,
     color: "#212121",
-    fontWeight: 500,
+    // fontWeight: 500,
     lineHeight: 35,
     textAlign: "center",
     letterSpacing: 0.01,
@@ -68,9 +68,9 @@ export const styles = StyleSheet.create({
   },
   postText: {
     fontFamily: "Roboto-Medium",
-    fontSize: 16,
+    // fontSize: 16,
     color: "#212121",
-    fontWeight: 500,
+    // fontWeight: 500,
     lineHeight: 19,
   },
   postDataWrapper: {
@@ -87,9 +87,9 @@ export const styles = StyleSheet.create({
   },
   postComments: {
     fontFamily: "Roboto-Regular",
-    fontSize: 16,
+    // fontSize: 16,
     color: "#212121",
-    fontWeight: 400,
+    // fontWeight: 400,
     lineHeight: 19,
   },
   postLocationWrapper: {
@@ -101,9 +101,9 @@ export const styles = StyleSheet.create({
   },
   postLocation: {
     fontFamily: "Roboto-Regular",
-    fontSize: 16,
+    // fontSize: 16,
     color: "#212121",
-    fontWeight: 400,
+    // fontWeight: 400,
     lineHeight: 19,
     textDecorationLine: "underline",
   },

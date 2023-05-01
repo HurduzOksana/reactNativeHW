@@ -42,7 +42,7 @@ export const styles = StyleSheet.create({
     alignSelf: "flex-start",
     marginTop: 8,
     fontFamily: "Roboto-Regular",
-    fontSize: 16,
+    // fontSize: 16,
     color: "#BDBDBD",
     // fontWeight: 400,
     lineHeight: 19,
@@ -63,7 +63,7 @@ export const styles = StyleSheet.create({
   },
   input: {
     fontFamily: "Roboto-Medium",
-    fontSize: 16,
+    // fontSize: 16,
     color: "#212121",
     // fontWeight: 500,
     lineHeight: 19,
@@ -83,7 +83,7 @@ export const styles = StyleSheet.create({
     fontFamily: "Roboto-Regular",
     textAlign: "center",
     color: "#ffffff",
-    fontSize: 16,
+    // fontSize: 16,
     lineHeight: 19,
   },
   removePostBtn: {

@@ -1,12 +1,4 @@
 import { StyleSheet } from "react-native";
-import * as Font from "expo-font";
-
-const loadFonts = async () => {
-  await Font.loadAsync({
-    "Roboto-Regular": require("../../assets/fonts/Roboto-Regular.ttf"),
-    "Roboto-Medium": require("../../assets/fonts/Roboto-Medium.ttf"),
-  });
-};
 
 export const styles = StyleSheet.create({
   container: {
@@ -20,7 +12,7 @@ export const styles = StyleSheet.create({
   },
   text: {
     fontFamily: "Roboto-Medium",
-    fontSize: 30,
+    // fontSize: 30,
     color: "#212121",
   },
   input: {
@@ -97,8 +89,8 @@ export const styles = StyleSheet.create({
   passwordShowText: {
     fontFamily: "Roboto-Regular",
     color: "#1B4371",
-    fontSize: 16,
-    fontWeight: 400,
+    // fontSize: 16,
+    // fontWeight: 400,
     textAlign: "right",
   },
 });

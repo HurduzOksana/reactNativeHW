@@ -1,3 +1,6 @@
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import {
   Text,
   View,
@@ -10,30 +13,25 @@ import {
   Pressable,
   KeyboardAvoidingView,
 } from "react-native";
-import React, { useState } from "react";
+
 import { styles } from "./RegistrationScreen.styles";
+import { signUp } from "../../redux/auth/authOperations";
 
 export default function RegistrationScreen({ navigation }) {
+  const dispatch = useDispatch();
   const [login, setLogin] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [image, setImage] = useState(null);
+  const [disabled, setDisabled] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
-  const [avatar, setAvatar] = useState(null);
-  const [focused, setFocused] = useState("");
   const [showKeyboard, setShowKeyboard] = useState(false);
-
-  const initialState = {
-    username: "",
-    email: "",
-    password: "",
-  };
-
-  const [state, setState] = useState(initialState);
+  const [focused, setFocused] = useState("");
+  // const [state, setState] = useState(initialState);
 
   const loginHandler = (text) => {
     setLogin(text);
   };
-
   const emailHandler = (text) => {
     setEmail(text);
   };
@@ -46,7 +44,21 @@ export default function RegistrationScreen({ navigation }) {
     setLogin("");
     setEmail("");
     setPassword("");
-    setAvatar(null);
+    setImage(null);
+  };
+
+  const onRegister = (e) => {
+    e.preventDefault();
+
+    const user = {
+      login: login.trim(),
+      email: email.trim(),
+      password,
+      image,
+    };
+
+    dispatch(signUp(user));
+    resetForm();
   };
 
   const addAvatar = async () => {
@@ -59,7 +71,7 @@ export default function RegistrationScreen({ navigation }) {
     if (result.canceled) {
       return;
     }
-    setAvatar(result.assets[0].uri);
+    setImage(result.assets[0].uri);
   };
 
   const handleInputShow = () => {
@@ -71,14 +83,23 @@ export default function RegistrationScreen({ navigation }) {
     setShowKeyboard(false);
   };
 
-  const handleSubmit = () => {
-    console.log("Form data:", state);
-    setState({
-      username: "",
-      email: "",
-      password: "",
-    });
-  };
+  // const handleSubmit = () => {
+  //   console.log("Form data:", state);
+  //   setState({
+  //     username: "",
+  //     email: "",
+  //     password: "",
+  //   });
+  // };
+
+  useEffect(() => {
+    if (email && password && login) {
+      setDisabled(false);
+    }
+    if (!email || !password || !login) {
+      setDisabled(true);
+    }
+  }, [email, password, login]);
 
   return (
     <TouchableWithoutFeedback onPress={handleKeyboard}>
@@ -97,8 +118,8 @@ export default function RegistrationScreen({ navigation }) {
               }}
             >
               <View style={styles.addAvatar}>
-                {avatar ? (
-                  <Image style={styles.avatar} source={{ uri: avatar }} />
+                {image ? (
+                  <Image style={styles.avatar} source={{ uri: image }} />
                 ) : null}
                 <Image
                   style={styles.addIcon}
@@ -168,7 +189,12 @@ export default function RegistrationScreen({ navigation }) {
                   </Text>
                 </Pressable>
               </View>
-              <TouchableOpacity style={styles.btn} onPress={handleSubmit}>
+              <TouchableOpacity
+                style={styles.btn}
+                disabled={disabled}
+                onPress={onRegister}
+                accessibilityLabel={"Register"}
+              >
                 <Text style={styles.btnText}>Зареєструватися</Text>
               </TouchableOpacity>
               <TouchableOpacity

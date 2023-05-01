@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { styles } from "./Home.styles";
 import { HeaderBackButton } from "@react-navigation/elements";
 import { Pressable } from "react-native";
@@ -11,9 +12,17 @@ import Posts from "../PostsScreen/PostsScreen";
 import Comments from "../CommentsScreen/CommentsScreen";
 import Map from "../MapScreen/MapScreen";
 
+import { signOut } from "../../redux/auth/authOperations";
+
 const Tabs = createBottomTabNavigator();
 
 const Home = ({ navigation, route }) => {
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(signOut());
+  };
+
   return (
     <Tabs.Navigator
       screenOptions={({ route }) => ({
@@ -73,7 +82,7 @@ const Home = ({ navigation, route }) => {
           headerRightContainerStyle: { paddingRight: 16 },
           headerLeftContainerStyle: { paddingLeft: 16 },
           headerRight: () => (
-            <Pressable>
+            <Pressable onPress={handleLogout}>
               <Icon name="log-out" size={24} color="#BDBDBD" />
             </Pressable>
           ),

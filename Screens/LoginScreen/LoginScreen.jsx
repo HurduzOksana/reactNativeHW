@@ -1,3 +1,5 @@
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Text,
   View,
@@ -9,22 +11,24 @@ import {
   Pressable,
   KeyboardAvoidingView,
 } from "react-native";
-import React, { useState } from "react";
 import { styles } from "./LoginScreen.styles";
+import { signIn } from "../../redux/auth/authOperations";
 
 export default function LoginScreen({ navigation }) {
+  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [disabled, setDisabled] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
-  const [focused, setFocused] = useState("");
   const [showKeyboard, setShowKeyboard] = useState(false);
+  const [focused, setFocused] = useState("");
 
-  const [state, setState] = useState(initialState);
+  // const [state, setState] = useState(initialState);
 
-  const initialState = {
-    email: "",
-    password: "",
-  };
+  // const initialState = {
+  //   email: "",
+  //   password: "",
+  // };
 
   const emailHandler = (text) => {
     setEmail(text);
@@ -39,6 +43,16 @@ export default function LoginScreen({ navigation }) {
     setPassword("");
   };
 
+  const onLogin = (e) => {
+    e.preventDefault();
+    const user = {
+      email: email.trim(),
+      password,
+    };
+    dispatch(signIn(user));
+    resetForm();
+  };
+
   const handleInputShow = () => {
     setShowPassword(!showPassword);
   };
@@ -48,13 +62,14 @@ export default function LoginScreen({ navigation }) {
     setShowKeyboard(false);
   };
 
-  const handleSubmit = () => {
-    console.log("Form Data:", state);
-    setState({
-      email: "",
-      password: "",
-    });
-  };
+  useEffect(() => {
+    if (email && password) {
+      setDisabled(false);
+    }
+    if (!email || !password) {
+      setDisabled(true);
+    }
+  }, [email, password]);
 
   return (
     <TouchableWithoutFeedback onPress={handleKeyboard}>
@@ -69,13 +84,19 @@ export default function LoginScreen({ navigation }) {
               style={{
                 ...styles.form,
                 paddingBottom:
-                  showKeyboard && Platform.OS == "android" ? 16 : 144,
+                  showKeyboard && Platform.OS == "android" ? 32 : 111,
               }}
             >
               <View style={styles.formTitle}>
                 <Text style={styles.text}>Увійти</Text>
               </View>
               <TextInput
+                returnKeyType="next"
+                autoCompleteType="email"
+                textContentType="emailAddress"
+                keyboardType="email-address"
+                autoCapitalize="none"
+                selectionColor="#FF6C00"
                 style={{
                   ...styles.input,
                   borderColor: focused === "email" ? "#FF6C00" : "#E8E8E8",
@@ -118,9 +139,12 @@ export default function LoginScreen({ navigation }) {
                   </Text>
                 </Pressable>
               </View>
+
               <TouchableOpacity
+                disabled={disabled}
                 style={styles.btn}
-                onPress={() => navigation.navigate("Home")}
+                onPress={onLogin}
+                accessibilityLabel={"Login"}
               >
                 <Text style={styles.btnText}>Увійти</Text>
               </TouchableOpacity>
