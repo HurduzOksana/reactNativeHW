@@ -1,4 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { Alert } from "react-native";
 import {
   authStateChanged,
   getCurrentUserInfo,
@@ -6,7 +7,6 @@ import {
   registerDB,
   logOut,
 } from "../../service/authApi";
-import { Alert } from "react-native";
 
 export const signUp = createAsyncThunk(
   "auth/signup",

@@ -71,7 +71,7 @@ const Posts = ({ navigation, route }) => {
                     <View style={styles.postDataCommentsWrapper}>
                       <Icon name="message-circle" size={24} color="#BDBDBD" />
                       <Text style={styles.postComments}>
-                        {item.comments.length ?? item.comments.length}
+                        {item.comments ? item.comments.length : 0}
                       </Text>
                     </View>
                   </Pressable>

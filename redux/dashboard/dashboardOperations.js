@@ -1,6 +1,16 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { Alert } from "react-native";
 
+import {
+  addPostToDB,
+  addCommentToPostInDB,
+  getAllPostsFromDB,
+  getAllCommentsToPostFromDB,
+  addLikeToPostInDB,
+  removeLikeToPostInDB,
+  getUsersPostsFromDB,
+} from "../../service/dashboardApi";
+
 export const addPost = createAsyncThunk(
   "db/addPost",
   async (data, { rejectWithValue }) => {
