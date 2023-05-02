@@ -1,4 +1,4 @@
-import { dashboard, storage } from "../firebase/config";
+import { db, storage } from "../firebase/config";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 
@@ -34,7 +34,7 @@ export const addPostToDB = async ({
 
     const url = await uploadImage(image, userId);
 
-    await dashboard.collection("posts").add({
+    await db.collection("posts").add({
       userId,
       comments,
       likes,
@@ -52,7 +52,7 @@ export const addPostToDB = async ({
 
 export const getAllPostsFromDB = async ({ setPosts }) => {
   try {
-    await dashboard.collection("posts").onSnapshot((snapshot) => {
+    await db.collection("posts").onSnapshot((snapshot) => {
       const allPosts = snapshot.docs.map((doc) => ({
         ...doc.data(),
         postId: doc.id,
@@ -72,7 +72,7 @@ export const getAllPostsFromDB = async ({ setPosts }) => {
 
 export const getUsersPostsFromDB = async ({ userId, setUsersPosts }) => {
   try {
-    await dashboard
+    await db
       .collection("posts")
       .where("userId", "==", `${userId}`)
       .onSnapshot((snapshot) => {
@@ -96,12 +96,12 @@ export const getUsersPostsFromDB = async ({ userId, setUsersPosts }) => {
 
 export const addCommentToPostInDB = async ({ postId, commentData }) => {
   try {
-    await dashboard
+    await db
       .collection("posts")
       .doc(postId)
       .collection("comments")
       .add({ ...commentData });
-    const ref = await dashboard.collection("posts").doc(postId);
+    const ref = await db.collection("posts").doc(postId);
     ref.update({
       comments: firebase.firestore.FieldValue.arrayUnion(commentData),
     });
@@ -112,7 +112,7 @@ export const addCommentToPostInDB = async ({ postId, commentData }) => {
 
 export const getAllCommentsToPostFromDB = async ({ postId, setComments }) => {
   try {
-    await dashboard
+    await db
       .collection("posts")
       .doc(postId)
       .collection("comments")
@@ -136,7 +136,7 @@ export const getAllCommentsToPostFromDB = async ({ postId, setComments }) => {
 
 export const addLikeToPostInDB = async ({ postId }) => {
   try {
-    const ref = await dashboard.collection("posts").doc(postId);
+    const ref = await db.collection("posts").doc(postId);
     ref.update({
       likes: firebase.firestore.FieldValue.increment(1),
       liked: true,
@@ -148,7 +148,7 @@ export const addLikeToPostInDB = async ({ postId }) => {
 
 export const removeLikeToPostInDB = async ({ postId }) => {
   try {
-    const ref = await dashboard.collection("posts").doc(postId);
+    const ref = await db.collection("posts").doc(postId);
     ref.update({
       likes: firebase.firestore.FieldValue.increment(-1),
       liked: false,

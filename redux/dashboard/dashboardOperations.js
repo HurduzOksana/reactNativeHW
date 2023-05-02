@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { Alert } from "react-native";
 
 export const addPost = createAsyncThunk(
-  "dashboard/addPost",
+  "db/addPost",
   async (data, { rejectWithValue }) => {
     try {
       const { userId, comments, likes, image, location, coordinates, text } =
@@ -26,7 +26,7 @@ export const addPost = createAsyncThunk(
 );
 
 export const getPosts = createAsyncThunk(
-  "dashboard/getPosts",
+  "db/getPosts",
   async (setPosts, { rejectWithValue }) => {
     try {
       const result = await getAllPostsFromDB({ setPosts: setPosts });
@@ -40,7 +40,7 @@ export const getPosts = createAsyncThunk(
 );
 
 export const getUsersPosts = createAsyncThunk(
-  "dashboard/getUsersPosts",
+  "db/getUsersPosts",
   async (data, { rejectWithValue }) => {
     const { userId, setUsersPosts } = data;
     try {
@@ -58,7 +58,7 @@ export const getUsersPosts = createAsyncThunk(
 );
 
 export const addComments = createAsyncThunk(
-  "dashboard/addComment",
+  "db/addComment",
   async (data, { rejectWithValue }) => {
     const { postId, commentData } = data;
     try {
@@ -73,7 +73,7 @@ export const addComments = createAsyncThunk(
 );
 
 export const getComments = createAsyncThunk(
-  "dashboard/getComments",
+  "db/getComments",
   async (data, { rejectWithValue }) => {
     const { postId, setComments } = data;
     try {
@@ -91,7 +91,7 @@ export const getComments = createAsyncThunk(
 );
 
 export const addLike = createAsyncThunk(
-  "dashboard/addLike",
+  "db/addLike",
   async (data, { rejectWithValue }) => {
     const { postId } = data;
     try {
@@ -106,7 +106,7 @@ export const addLike = createAsyncThunk(
 );
 
 export const removeLike = createAsyncThunk(
-  "dashboard/removeLike",
+  "db/removeLike",
   async (data, { rejectWithValue }) => {
     const { postId } = data;
     try {

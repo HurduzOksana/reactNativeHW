@@ -19,7 +19,6 @@ export const signUp = createAsyncThunk(
         displayName: login,
         image,
       });
-      // console.log('register result from operations', result);
       return result;
     } catch (error) {
       console.dir({ error });
@@ -32,11 +31,9 @@ export const signUp = createAsyncThunk(
 export const signIn = createAsyncThunk(
   "auth/signin",
   async (user, { rejectWithValue }) => {
-    //  console.log('user', user);
     try {
       const { email, password } = user;
       const result = await loginDB({ email: email, password: password });
-      // console.log('login', result);
       return result;
     } catch (error) {
       console.dir({ error });

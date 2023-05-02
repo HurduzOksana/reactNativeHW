@@ -16,6 +16,8 @@ import {
 
 import { styles } from "./RegistrationScreen.styles";
 import { signUp } from "../../redux/auth/authOperations";
+import Icon from "@expo/vector-icons/Feather";
+import { imagePicker } from "../../utils/imagePicker";
 
 export default function RegistrationScreen({ navigation }) {
   const dispatch = useDispatch();
@@ -27,7 +29,6 @@ export default function RegistrationScreen({ navigation }) {
   const [showPassword, setShowPassword] = useState(false);
   const [showKeyboard, setShowKeyboard] = useState(false);
   const [focused, setFocused] = useState("");
-  // const [state, setState] = useState(initialState);
 
   const loginHandler = (text) => {
     setLogin(text);
@@ -61,19 +62,6 @@ export default function RegistrationScreen({ navigation }) {
     resetForm();
   };
 
-  const addAvatar = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      quality: 1,
-    });
-
-    if (result.canceled) {
-      return;
-    }
-    setImage(result.assets[0].uri);
-  };
-
   const handleInputShow = () => {
     setShowPassword(!showPassword);
   };
@@ -82,15 +70,6 @@ export default function RegistrationScreen({ navigation }) {
     Keyboard.dismiss();
     setShowKeyboard(false);
   };
-
-  // const handleSubmit = () => {
-  //   console.log("Form data:", state);
-  //   setState({
-  //     username: "",
-  //     email: "",
-  //     password: "",
-  //   });
-  // };
 
   useEffect(() => {
     if (email && password && login) {
@@ -121,11 +100,20 @@ export default function RegistrationScreen({ navigation }) {
                 {image ? (
                   <Image style={styles.avatar} source={{ uri: image }} />
                 ) : null}
-                <Image
+                <Pressable
                   style={styles.addIcon}
-                  source={require("../../assets/add.png")}
-                  onPress={() => addAvatar(setImage)}
-                />
+                  onPress={() => imagePicker(setImage)}
+                >
+                  {image ? (
+                    <View style={styles.removeImageBtnImage}>
+                      <Icon name="plus" size={25} color="#BDBDBD" />
+                    </View>
+                  ) : (
+                    <View style={styles.addImageBtnImage}>
+                      <Icon name="plus" size={25} color="#FF6C00" />
+                    </View>
+                  )}
+                </Pressable>
               </View>
               <View style={styles.formTitle}>
                 <Text style={styles.text}>Реєстрація</Text>

@@ -4,7 +4,7 @@ import dashboardSlice from "./dashboard/dashboardSlice";
 
 const rootReducer = combineReducers({
   auth: authSlice,
-  dashboard: dashboardSlice,
+  db: dashboardSlice,
 });
 
 export const store = configureStore({

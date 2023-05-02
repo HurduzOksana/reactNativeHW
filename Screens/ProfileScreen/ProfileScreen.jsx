@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAvatar, getName, getUid } from "../../redux/auth/authSelectors";
+import { getAvatar, getEmail, getUid } from "../../redux/auth/authSelectors";
 import {
   addLike,
   getUsersPosts,
@@ -24,7 +24,7 @@ const Profile = ({ navigation, route }) => {
   const dispatch = useDispatch();
   const userId = useSelector(getUid);
   const image = useSelector(getAvatar);
-  const name = useSelector(getName);
+  const name = useSelector(getEmail);
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -66,7 +66,7 @@ const Profile = ({ navigation, route }) => {
               <Image style={styles.avatar} source={{ uri: image }} />
             ) : null}
           </View>
-          <Text style={styles.title}>{name ? name : "Anonimous"}</Text>
+          <Text style={styles.title}>{name ? name : "User"}</Text>
           <Pressable style={styles.logoutBtn} onPress={handleLogout}>
             <Icon name="log-out" size={24} color="#BDBDBD" />
           </Pressable>
@@ -78,7 +78,7 @@ const Profile = ({ navigation, route }) => {
                   posts.length <= 0 ? (
                     <View style={styles.emptyMessageBox}>
                       <Text style={styles.emptyMessageStyle}>
-                        No posts added yet...
+                        Ще немає постів...
                       </Text>
                     </View>
                   ) : null

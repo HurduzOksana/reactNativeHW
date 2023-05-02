@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAvatar, getEmail, getName } from "../../redux/auth/authSelectors";
+import { getAvatar, getEmail } from "../../redux/auth/authSelectors";
 import { getPosts } from "../../redux/dashboard/dashboardOperations";
 import {
   View,
@@ -16,7 +16,6 @@ import { styles } from "./PostsScreen.styles";
 const Posts = ({ navigation, route }) => {
   const dispatch = useDispatch();
   const image = useSelector(getAvatar);
-  const name = useSelector(getName);
   const email = useSelector(getEmail);
   const [posts, setPosts] = useState([]);
 
@@ -43,8 +42,7 @@ const Posts = ({ navigation, route }) => {
           ) : null}
         </View>
         <View>
-          <Text style={styles.name}>{name ? name : "Anonymous"}</Text>
-          <Text style={styles.email}>{email ? email : "Anonymous"}</Text>
+          <Text style={styles.email}>{email}</Text>
         </View>
       </View>
       <View style={styles.postsList}>
@@ -54,7 +52,7 @@ const Posts = ({ navigation, route }) => {
               posts.length <= 0 ? (
                 <View style={styles.emptyMessageBox}>
                   <Text style={styles.emptyMessageStyle}>
-                    No posts added yet...
+                    Ще немає постів...
                   </Text>
                 </View>
               ) : null

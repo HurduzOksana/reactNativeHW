@@ -97,7 +97,7 @@ const Comments = ({ navigation, route }) => {
                 comments.length <= 0 ? (
                   <View style={styles.emptyMessageBox}>
                     <Text style={styles.emptyMessageStyle}>
-                      No comments added yet...
+                      Ще немає комментарів...
                     </Text>
                   </View>
                 ) : null
@@ -158,7 +158,7 @@ const Comments = ({ navigation, route }) => {
               onBlur={() => {
                 setShowKeyboard(false);
               }}
-              placeholder="Comment..."
+              placeholder="Комментар..."
             ></TextInput>
             <Pressable
               style={{ ...styles.addCommentBtn, opacity: disabled ? 0.5 : 1 }}

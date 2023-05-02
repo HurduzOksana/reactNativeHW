@@ -93,4 +93,23 @@ export const styles = StyleSheet.create({
     // fontWeight: 400,
     textAlign: "right",
   },
+  removeImageBtnImage: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 50,
+    borderWidth: 1,
+    borderColor: "#BDBDBD",
+    backgroundColor: "#ffffff",
+    // transform: [{ rotate: "45deg" }],
+  },
+  addImageBtnImage: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 50,
+    borderWidth: 1,
+    borderColor: "#FF6C00",
+    backgroundColor: "#ffffff",
+  },
 });

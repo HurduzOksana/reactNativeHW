@@ -25,6 +25,8 @@ import { getCity } from "../../service/geocode";
 import { getUid } from "../../redux/auth/authSelectors";
 import { addPost } from "../../redux/dashboard/dashboardOperations";
 
+import { imagePicker } from "../../utils/imagePicker";
+
 const CreatePost = ({ navigation, route }) => {
   const dispatch = useDispatch();
   const userId = useSelector(getUid);
@@ -171,7 +173,7 @@ const CreatePost = ({ navigation, route }) => {
                     setPhotoTaken(false);
                     setImage(null);
                   }}
-                  accessibilityLabel={"Add picture"}
+                  accessibilityLabel={"Додати фото"}
                 >
                   <FontAwesome5
                     name="camera"
@@ -190,20 +192,6 @@ const CreatePost = ({ navigation, route }) => {
                 }}
               >
                 <View style={styles.picture}>
-                  {/* <Pressable
-            style={styles.flipContainer}
-            onPress={() => {
-              setType(
-                type === Camera.Constants.Type.back
-                  ? Camera.Constants.Type.front
-                  : Camera.Constants.Type.back
-              );
-            }}
-          >
-            <Text style={{ fontSize: 18, marginBottom: 10, color: "black" }}>
-              Flip
-            </Text>
-          </Pressable> */}
                   <Pressable
                     style={styles.addImageBtn}
                     onPress={async () => {
@@ -265,7 +253,7 @@ const CreatePost = ({ navigation, route }) => {
                         }
                       : styles.addImageBtn
                   }
-                  onPress={() => imageHandler(setImage)}
+                  onPress={() => imagePicker(setImage)}
                   accessibilityLabel={"Add picture"}
                 >
                   <FontAwesome5
@@ -280,18 +268,18 @@ const CreatePost = ({ navigation, route }) => {
             {image ? (
               <Pressable
                 style={{ alignSelf: "flex-start" }}
-                onPress={() => imageHandler(setImage)}
+                onPress={() => imagePicker(setImage)}
                 accessibilityLabel={"Change picture"}
               >
-                <Text style={styles.addImageText}>Change photo</Text>
+                <Text style={styles.addImageText}>Змінити фото</Text>
               </Pressable>
             ) : (
               <Pressable
                 style={{ alignSelf: "flex-start" }}
-                onPress={() => imageHandler(setImage)}
+                onPress={() => imagePicker(setImage)}
                 accessibilityLabel={"Add picture"}
               >
-                <Text style={styles.addImageText}>Add photo</Text>
+                <Text style={styles.addImageText}>Додати фото</Text>
               </Pressable>
             )}
 
@@ -349,7 +337,7 @@ const CreatePost = ({ navigation, route }) => {
                     : styles.addPostBtnText
                 }
               >
-                Publish
+                Опублікувати
               </Text>
             </Pressable>
 

@@ -21,7 +21,7 @@ const rejected = () => {
 };
 
 export const dashboardSlice = createSlice({
-  name: "dashboard",
+  name: "db",
   initialState,
   extraReducers: (builder) =>
     builder

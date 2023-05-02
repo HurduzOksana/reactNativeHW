@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { styles } from "./Home.styles";
 import { HeaderBackButton } from "@react-navigation/elements";
@@ -73,7 +73,6 @@ const Home = ({ navigation, route }) => {
       <Tabs.Screen
         name="Posts"
         component={Posts}
-        //  initialParams={{...obj, posts}}
         options={{
           headerTitleAlign: "center",
           headerStyle: styles.headerBox,
@@ -91,7 +90,6 @@ const Home = ({ navigation, route }) => {
       <Tabs.Screen
         name="Create post"
         component={CreatePost}
-        // initialParams={{...obj, posts}}
         options={{
           headerTitleAlign: "center",
           headerStyle: styles.headerBox,
@@ -112,7 +110,6 @@ const Home = ({ navigation, route }) => {
       <Tabs.Screen
         name="Profile"
         component={Profile}
-        //  initialParams={{...obj, posts}}
         options={{ headerShown: false }}
       />
       <Tabs.Screen

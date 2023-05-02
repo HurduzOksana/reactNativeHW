@@ -25,7 +25,6 @@ export const registerDB = async ({ displayName, image, email, password }) => {
     const url = await uploadImage(image, user.user.multiFactor.user);
 
     const updatedUser = await getCurrentUserInfo(displayName, url);
-    //   console.log("updatedUser", updatedUser);
     return updatedUser;
   } catch (error) {
     throw error;

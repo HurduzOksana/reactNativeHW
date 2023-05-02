@@ -1,7 +1,5 @@
 import Geocode from "react-geocode";
 
-// import { REACT_APP_MAP_API_KEY } from "react-native-dotenv";
-
 Geocode.setApiKey("AIzaSyDsb7F-VyBJn7r4LilYH_lRHBpPfgyUga8");
 
 export const getCity = async (latitude, longitude) => {
